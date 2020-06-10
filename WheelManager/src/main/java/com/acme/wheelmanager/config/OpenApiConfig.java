@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 public class OpenApiConfig {
 
     @Bean(name = "wheelManagerOpenApi")
-    public OpenAPI bloggingOpenApi() {
+    public OpenAPI wheelManagerOpenApi() {
         // Available at
-        // http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
+        // http://localhost:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-configs
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info()
