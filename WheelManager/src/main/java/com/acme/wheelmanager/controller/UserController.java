@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @Tag(name = "users", description = "Users API")
 @RestController
 @RequestMapping("/api")
-
 public class UserController {
 
     @Autowired
