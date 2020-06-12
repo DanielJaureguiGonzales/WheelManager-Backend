@@ -1,5 +1,4 @@
 package com.acme.wheelmanager.model;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,37 +8,38 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "corporations")
 @Getter
 @Setter
-public class User extends AuditModel{
+public class Corporation extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     @NotBlank
-    @Size(max = 30)
     @Column(unique = true)
-    private String username;
+    private int ruc;
 
     @NotNull
     @NotBlank
     @Size(max = 25)
-    private String password;
+    private String name;
 
     @NotNull
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 30)
     @Column(unique = true)
-    private String email;
+    private String address;
 
+    @NotNull
+    @NotBlank
+    @Size(max = 20)
+    @Column(unique = true)
+    private String phone;
+
+    //
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_profile_id", referencedColumnName = "id")
-    private UserProfile userProfile;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "corporation_id" , referencedColumnName= "id")
-    private Corporation corporation;
-
+    @JoinColumn(name = "user_id" , referencedColumnName= "id")
+    private User user;
 }
