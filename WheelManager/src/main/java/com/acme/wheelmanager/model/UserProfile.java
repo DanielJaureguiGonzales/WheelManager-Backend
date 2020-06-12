@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user_profiles")
 @Getter
 @Setter
-public class User extends AuditModel{
+public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,20 +20,17 @@ public class User extends AuditModel{
     @NotNull
     @NotBlank
     @Size(max = 30)
-    @Column(unique = true)
-    private String username;
+    private String name;
 
     @NotNull
     @NotBlank
-    @Size(max = 25)
-    private String password;
+    @Size(max = 30)
+    private String last_name;
 
-    @NotNull
-    @NotBlank
-    @Size(max = 100)
-    @Column(unique = true)
-    private String email;
+    @Size(max = 30)
+    private String gender;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_profile_id", referencedColumnName = "id")
-    private UserProfile userProfile;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }
