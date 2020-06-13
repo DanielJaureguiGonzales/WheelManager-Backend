@@ -4,11 +4,15 @@ import com.acme.wheelmanager.exception.ResourceNotFoundException;
 import com.acme.wheelmanager.model.Promo;
 import com.acme.wheelmanager.repository.CorporationRepository;
 import com.acme.wheelmanager.repository.PromoRepository;
+import com.acme.wheelmanager.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PromoServiceImpl implements PromoService{
@@ -17,6 +21,8 @@ public class PromoServiceImpl implements PromoService{
     private CorporationRepository corporationRepository;
     @Autowired
     private PromoRepository promoRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Page<Promo> getAllPromosByCorporationId(Long corporationId, Pageable pageable) {
@@ -71,5 +77,16 @@ public class PromoServiceImpl implements PromoService{
     @Override
     public Page<Promo> getAllPromos(Pageable pageable) {
         return promoRepository.findAll(pageable);
+    }
+
+
+    @Override
+    public Page<Promo> getAllPromosByUserId(Long userId, Pageable pageable) {
+        return userRepository.findById(userId).map(user -> {
+            List<Promo> promos = user.getPromos();
+            int promosCount = promos.size();
+            return new PageImpl<>(promos, pageable, promosCount);
+        })
+                .orElseThrow(() -> new ResourceNotFoundException("User", "Id",userId));
     }
 }

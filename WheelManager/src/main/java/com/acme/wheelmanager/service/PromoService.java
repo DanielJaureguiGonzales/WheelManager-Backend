@@ -14,4 +14,5 @@ public interface PromoService {
     Promo createPromo(Long corporationId,Promo promo);
     Promo getPromoById(Long promoId);
     Page<Promo> getAllPromos(Pageable pageable);
+    Page<Promo> getAllPromosByUserId(Long userId, Pageable pageable);
 }

@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface UserService {
+    User assignUserPromo(Long userId, Long promoId);
+    User unassignUserPromo(Long userId, Long promoId);
+    Page<User> getAllUsersByPromoId(Long promoId, Pageable pageable);
     ResponseEntity<?> deleteUser(Long userId);
     User updateUser(Long userId, User userRequest);
     User createUser(User user);

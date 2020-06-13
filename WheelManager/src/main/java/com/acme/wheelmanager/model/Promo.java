@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "promos")
@@ -41,4 +42,10 @@ public class Promo {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Corporation corporation;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "promos")
+    @JsonIgnore
+    private List<User> users;
 }
