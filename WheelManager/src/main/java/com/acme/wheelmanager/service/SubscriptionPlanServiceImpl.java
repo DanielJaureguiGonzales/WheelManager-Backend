@@ -27,9 +27,9 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService{
     public SubscriptionPlan updateSubscriptionPlan(Long subscriptionPlanId, SubscriptionPlan subscriptionPlanRequest) {
         SubscriptionPlan subscriptionPlan = subscriptionPlanRepository.findById(subscriptionPlanId)
                 .orElseThrow(() -> new ResourceNotFoundException("SubscriptionPlan", "Id", subscriptionPlanId));
-        /*subscriptionPlan.setUsername(subscriptionPlanRequest.getUsername());
-        subscriptionPlan.setPassword(subscriptionPlanRequest.getPassword());
-        subscriptionPlan.setEmail(subscriptionPlanRequest.getEmail());*/
+        subscriptionPlan.setSubscription_plan_name(subscriptionPlanRequest.getSubscription_plan_name());
+        subscriptionPlan.setPrice(subscriptionPlanRequest.getPrice());
+        subscriptionPlan.setDescription(subscriptionPlanRequest.getDescription());
         return subscriptionPlanRepository.save(subscriptionPlan);
     }
 
