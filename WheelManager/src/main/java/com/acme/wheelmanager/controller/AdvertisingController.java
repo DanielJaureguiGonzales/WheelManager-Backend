@@ -51,6 +51,21 @@ public class AdvertisingController {
         return convertToResource(advertisingService.getAdvertisingById(advertisingId));
     }
 
+    @GetMapping("/users/{userId}/advertisings")
+    public Page<AdvertisingResource> getAllAdvertisingsByUserId(
+            @PathVariable(name = "userId") Long userId,
+            Pageable pageable) {
+        Page<Advertising> promoPage = advertisingService.getAllAdvertisingsByUserId(userId, pageable);
+        List<AdvertisingResource> resources = promoPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    @GetMapping("/users/{userId}/advertisings/{advertisingId}")
+    public AdvertisingResource getAdvertisingByIdAndUserId(@PathVariable(name = "userId") Long userId,
+                                                      @PathVariable(name = "advertisingId") Long advertisingId) {
+        return convertToResource(advertisingService.getAdvertisingByIdAndUserId(userId, advertisingId));
+    }
+
     @Operation(summary = "Create Advertising ", description = "Create an Advertising ", tags = { "advertisings" })
     @PostMapping("/advertisings")
     public AdvertisingResource createPost(@Valid @RequestBody SaveAdvertisingResource resource)  {

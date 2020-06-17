@@ -14,7 +14,7 @@ public class RecommendationServiceImpl implements RecommendationService {
     private RecommendationRepository recommendationRepository;
 
     @Override
-    public Page<Recommendation> getAllPromosByUserId(Long userId, Pageable pageable) {
+    public Page<Recommendation> getAllRecommendationsByUserId(Long userId, Pageable pageable) {
         return recommendationRepository.findByUserId(userId,pageable);
     }
 

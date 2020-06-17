@@ -10,12 +10,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
-@Table(name = "subscription_plans")
+@Table(name = "product_categories")
 @Getter
 @Setter
-public class SubscriptionPlan extends AuditModel{
+public class ProductCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,18 +25,11 @@ public class SubscriptionPlan extends AuditModel{
     @NotNull
     @NotBlank
     @Size(max = 30)
-    //@Column(unique = true)
-    private String subscription_plan_name;
+    private String name;
 
     @NotNull
     @NotBlank
-    private Double price;
-
-    @NotNull
-    @NotBlank
-    @Size(max = 250)
-    @Column(unique = true)
-    private String description;
+    @Size(max = 255)
+    private String image_url;
 
 }
-

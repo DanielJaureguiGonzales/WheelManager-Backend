@@ -50,6 +50,22 @@ public class RecommendationController {
         return convertToResource(recommendationService.getRecommendationById(recommendationId));
     }
 
+    @GetMapping("/users/{userId}/recommendations")
+    public Page<RecommendationResource> getAllRecommendationsByUserId(
+            @PathVariable(name = "userId") Long userId,
+            Pageable pageable) {
+        Page<Recommendation> promoPage = recommendationService.getAllRecommendationsByUserId(userId, pageable);
+        List<RecommendationResource> resources = promoPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    @GetMapping("/users/{userId}/recommendations/{recommendationId}")
+    public RecommendationResource getRecommendationByIdAndUserId(@PathVariable(name = "userId") Long userId,
+                                                           @PathVariable(name = "recommendationId") Long recommendationId) {
+        return convertToResource(recommendationService.getRecommendationByIdAndUserId(userId, recommendationId));
+    }
+
+
     @Operation(summary = "Create Recommendations ", description = "Create a Recommendation ", tags = { "recommendations" })
     @PostMapping("/recommendations")
     public RecommendationResource createPost(@RequestBody @Valid SaveRecommendationResource resource)  {
