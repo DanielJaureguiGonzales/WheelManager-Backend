@@ -2,7 +2,6 @@ package com.acme.wheelmanager.service;
 
 import com.acme.wheelmanager.exception.ResourceNotFoundException;
 import com.acme.wheelmanager.model.Corporation;
-import com.acme.wheelmanager.model.User;
 import com.acme.wheelmanager.repository.CorporationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +22,6 @@ public class CorporationServiceImpl implements CorporationService{
         corporationRepository.delete(corporation);
         return ResponseEntity.ok().build();
     }
-
 
     @Override
     public Corporation updateCorporation(Long corporationId, Corporation corporationRequest) {
