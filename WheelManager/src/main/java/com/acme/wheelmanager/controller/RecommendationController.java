@@ -2,6 +2,7 @@ package com.acme.wheelmanager.controller;
 
 import com.acme.wheelmanager.model.Recommendation;
 import com.acme.wheelmanager.resource.RecommendationResource;
+import com.acme.wheelmanager.resource.SaveRecommendationResource;
 import com.acme.wheelmanager.service.RecommendationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -51,14 +52,14 @@ public class RecommendationController {
 
     @Operation(summary = "Create Recommendations ", description = "Create a Recommendation ", tags = { "recommendations" })
     @PostMapping("/recommendations")
-    public RecommendationResource createPost(@RequestBody @Valid RecommendationResource resource)  {
+    public RecommendationResource createPost(@RequestBody @Valid SaveRecommendationResource resource)  {
         Recommendation recommendation = convertToEntity(resource);
         return convertToResource(recommendationService.createRecommendation(recommendation));
     }
 
     @Operation(summary = "Update Recommendation by Id", description = "Update a Recommendation by specifying Id", tags = { "recommendations" })
     @PutMapping("/recommendations/{id}")
-    public RecommendationResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody RecommendationResource resource) {
+    public RecommendationResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveRecommendationResource resource) {
         Recommendation recommendation = convertToEntity(resource);
         return convertToResource(recommendationService.updateRecommendation(postId, recommendation));
     }
@@ -68,7 +69,7 @@ public class RecommendationController {
     public ResponseEntity<?> deleteRecommendation(@PathVariable(name = "id") Long recommendationId) {
         return recommendationService.deleteRecommendation(recommendationId);
     }
-    private Recommendation convertToEntity(@Valid RecommendationResource resource) {
+    private Recommendation convertToEntity(@Valid SaveRecommendationResource resource) {
         return mapper.map(resource, Recommendation.class);
     }
 

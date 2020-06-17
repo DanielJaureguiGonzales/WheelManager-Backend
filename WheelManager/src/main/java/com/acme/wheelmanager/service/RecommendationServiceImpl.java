@@ -14,6 +14,20 @@ public class RecommendationServiceImpl implements RecommendationService {
     private RecommendationRepository recommendationRepository;
 
     @Override
+    public Page<Recommendation> getAllPromosByUserId(Long userId, Pageable pageable) {
+        return recommendationRepository.findByUserId(userId,pageable);
+    }
+
+    @Override
+    public Recommendation getRecommendationByIdAndUserId(Long recommendationId, Long userId) {
+        return recommendationRepository.findByIdAndUserId(recommendationId, userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Recommendation not found with Id " + recommendationId +
+                                " and UserId " + userId));
+    }
+
+
+    @Override
     public ResponseEntity<?> deleteRecommendation(Long recommendationId) {
         Recommendation recommendation = recommendationRepository.findById(recommendationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Post", "Id", recommendationId));

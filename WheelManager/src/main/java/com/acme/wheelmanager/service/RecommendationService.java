@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface RecommendationService {
+    Page<Recommendation> getAllPromosByUserId(Long userId, Pageable pageable);
+    Recommendation getRecommendationByIdAndUserId(Long recommendationId, Long userId);
     ResponseEntity<?> deleteRecommendation(Long recommendationId);
     Recommendation updateRecommendation(Long recommendationId, Recommendation recommendationRequest);
     Recommendation createRecommendation(Recommendation recommendationRequest);
