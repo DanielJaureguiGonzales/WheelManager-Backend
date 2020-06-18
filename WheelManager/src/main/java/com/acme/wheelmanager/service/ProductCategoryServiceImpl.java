@@ -13,6 +13,20 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
+
+    @Override
+    public Page<ProductCategory> getAllProductCategoriesByProductId(Long productId, Pageable pageable) {
+        return productCategoryRepository.findByProductId(productId,pageable);
+    }
+
+    @Override
+    public ProductCategory getProductCategoryByIdAndProductId(Long productCategoryId, Long productId) {
+        return productCategoryRepository.findByIdAndProductId(productCategoryId, productId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Product Category not found with Id " + productCategoryId +
+                                " and ProductId " + productId));
+    }
+
     @Override
     public ResponseEntity<?> deleteProductCategory(Long productCategoryId) {
         ProductCategory productCategory = productCategoryRepository.findById(productCategoryId)

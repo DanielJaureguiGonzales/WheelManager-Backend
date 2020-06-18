@@ -51,6 +51,21 @@ public class ProductCategoryController {
         return convertToResource(productCategoryService.getProductCategoryById(productCategoryId));
     }
 
+    @GetMapping("/products/{productId}/product_categories")
+    public Page<ProductCategoryResource> getAllProductCategoriesByProductId(
+            @PathVariable(name = "productId") Long productId,
+            Pageable pageable) {
+        Page<ProductCategory> promoPage = productCategoryService.getAllProductCategoriesByProductId(productId, pageable);
+        List<ProductCategoryResource> resources = promoPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+    @GetMapping("/products/{productId}/product_categories/{productCategoryId}")
+    public ProductCategoryResource getProductCategoryByIdAndProductId(@PathVariable(name = "productId") Long productId,
+                                                                 @PathVariable(name = "productCategoryId") Long productCategoryId) {
+        return convertToResource(productCategoryService.getProductCategoryByIdAndProductId(productId, productCategoryId));
+    }
+
     @Operation(summary = "Create ProductCategory ", description = "Create an ProductCategory ", tags = { "product_categories" })
     @PostMapping("/product_categories")
     public ProductCategoryResource createPost(@Valid @RequestBody SaveProductCategoryResource resource)  {

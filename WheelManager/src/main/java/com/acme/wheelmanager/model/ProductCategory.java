@@ -32,4 +32,10 @@ public class ProductCategory {
     @Size(max = 255)
     private String image_url;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Product product;
+
 }

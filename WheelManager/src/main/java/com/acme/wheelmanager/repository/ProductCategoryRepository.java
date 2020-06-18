@@ -10,4 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface ProductCategoryRepository  extends JpaRepository<ProductCategory,Long> {
+    Page<ProductCategory> findByProductId(Long productId, Pageable pageable);
+    Optional<ProductCategory> findByIdAndProductId(Long id, Long productId);
 }
