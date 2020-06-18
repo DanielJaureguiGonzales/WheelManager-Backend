@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @PostMapping("/corporations/{corporationId}/products")
-    public ProductResource createComment(@PathVariable(name = "corporationId") Long corporationId,
+    public ProductResource createProduct(@PathVariable(name = "corporationId") Long corporationId,
                                          @Valid @RequestBody SaveProductResource resource) {
         return convertToResource(productService.createProduct(corporationId, convertToEntity(resource)));
 
