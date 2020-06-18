@@ -27,7 +27,7 @@ public class CoordinateController {
 
     @Autowired
     private ModelMapper mapper;
-
+ 
     @Autowired
     private CoordinateService coordinateService;
 
