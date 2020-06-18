@@ -41,6 +41,7 @@ public class AlertServiceImpl implements AlertService {
     public Alert updateAlert(Long alertId, Alert alertRequest) {
         Alert alert = alertRepository.findById(alertId)
                 .orElseThrow(() -> new ResourceNotFoundException("Alert", "Id", alertId));
+        alert.setName(alertRequest.getName());
         alert.setDescription(alertRequest.getDescription());
         return alertRepository.save(alert);
     }
