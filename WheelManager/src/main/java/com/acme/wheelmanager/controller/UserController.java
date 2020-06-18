@@ -48,7 +48,6 @@ public class UserController {
             @PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
-
     @Operation(summary = "Create User ", description = "Create a User ", tags = { "users" })
     @PostMapping("/users")
     public UserResource createPost(@Valid @RequestBody SaveUserResource resource)  {
@@ -62,10 +61,21 @@ public class UserController {
         return convertToResource(userService.updateUser(postId, user));
     }
 
-    @Operation(summary = "Delete User by Id", description = "Delete a User by specifying Id", tags = { "users" })
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long userId) {
         return userService.deleteUser(userId);
+    }
+
+    @PostMapping("/users/{userId}/promos/{promoId}")
+    public UserResource assignUserPromo(@PathVariable(name = "userId") Long userId,
+                                      @PathVariable(name = "promoId") Long promoId) {
+        return convertToResource(userService.assignUserPromo(userId, promoId));
+    }
+
+    @DeleteMapping("/posts/{postId}/tags/{tagId}")
+    public UserResource unassignUserPromo(@PathVariable(name = "userId") Long userId,
+                                        @PathVariable(name = "promoId") Long promoId) {
+        return convertToResource(userService.unassignUserPromo(userId, promoId));
     }
     private User convertToEntity(SaveUserResource resource) {
         return mapper.map(resource, User.class);
