@@ -32,7 +32,7 @@ public class UserController {
 
     @Operation(summary = "Get Users", description = "Get All Users by Pages", tags = { "users" })
     @GetMapping("/users")
-    public Page<UserResource> getAllPosts(
+    public Page<UserResource> getAllUsers(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<User> postsPage = userService.getAllUsers(pageable);

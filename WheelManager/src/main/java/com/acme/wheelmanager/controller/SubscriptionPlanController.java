@@ -33,7 +33,7 @@ public class SubscriptionPlanController {
 
     @Operation(summary = "Get SubscriptionPlans", description = "Get All SubscriptionPlans by Pages", tags = { "subscription_plans" })
     @GetMapping("/subscription_plans")
-    public Page<SubscriptionPlanResource> getAllPosts(
+    public Page<SubscriptionPlanResource> getAllSubscriptionPlans(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<SubscriptionPlan> postsPage = subscriptionPlanService.getAllSubscriptionPlans(pageable);
@@ -44,7 +44,7 @@ public class SubscriptionPlanController {
 
     @Operation(summary = "Get SubscriptionPlan by Id", description = "Get a SubscriptionPlans by specifying Id", tags = { "subscription_plans" })
     @GetMapping("/subscription_plans/{id}")
-    public SubscriptionPlanResource getPostById(
+    public SubscriptionPlanResource getSubscriptionPlanById(
             @Parameter(description="SubscriptionPlan Id")
             @PathVariable(name = "id") Long subscriptionPlanId) {
         return convertToResource(subscriptionPlanService.getSubscriptionPlanById(subscriptionPlanId));
@@ -52,13 +52,13 @@ public class SubscriptionPlanController {
 
     @Operation(summary = "Create SubscriptionPlan ", description = "Create a SubscriptionPlan ", tags = { "subscription_plans" })
     @PostMapping("/subscription_plans")
-    public SubscriptionPlanResource createPost(@Valid @RequestBody SaveSubscriptionPlanResource resource)  {
+    public SubscriptionPlanResource createSubscriptionPlan(@Valid @RequestBody SaveSubscriptionPlanResource resource)  {
         SubscriptionPlan subscriptionPlan = convertToEntity(resource);
         return convertToResource(subscriptionPlanService.createSubscriptionPlan(subscriptionPlan));
     }
     @Operation(summary = "Update SubscriptionPlan by Id", description = "Update a SubscriptionPlan by specifying Id", tags = { "subscription_plans" })
     @PutMapping("/subscription_plans/{id}")
-    public SubscriptionPlanResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveSubscriptionPlanResource resource) {
+    public SubscriptionPlanResource updateSubscriptionPlan(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveSubscriptionPlanResource resource) {
         SubscriptionPlan subscriptionPlan = convertToEntity(resource);
         return convertToResource(subscriptionPlanService.updateSubscriptionPlan(postId, subscriptionPlan));
     }

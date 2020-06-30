@@ -34,7 +34,7 @@ public class AdvertisingController {
 
     @Operation(summary = "Get Advertisings", description = "Get All Advertisings by Pages", tags = { "advertisings" })
     @GetMapping("/advertisings")
-    public Page<AdvertisingResource> getAllPosts(
+    public Page<AdvertisingResource> getAllAdvertisings(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<Advertising> postsPage = advertisingService.getAllAdvertisings(pageable);
@@ -45,7 +45,7 @@ public class AdvertisingController {
 
     @Operation(summary = "Get Advertising by Id", description = "Get a Advertisings by specifying Id", tags = { "advertisings" })
     @GetMapping("/advertisings/{id}")
-    public AdvertisingResource getPostById(
+    public AdvertisingResource getAdvertisingById(
             @Parameter(description="Advertising Id")
             @PathVariable(name = "id") Long advertisingId) {
         return convertToResource(advertisingService.getAdvertisingById(advertisingId));
@@ -68,13 +68,13 @@ public class AdvertisingController {
 
     @Operation(summary = "Create Advertising ", description = "Create an Advertising ", tags = { "advertisings" })
     @PostMapping("/advertisings")
-    public AdvertisingResource createPost(@Valid @RequestBody SaveAdvertisingResource resource)  {
+    public AdvertisingResource createAdvertising(@Valid @RequestBody SaveAdvertisingResource resource)  {
         Advertising advertising = convertToEntity(resource);
         return convertToResource(advertisingService.createAdvertising(advertising));
     }
     @Operation(summary = "Update Advertising by Id", description = "Update an Advertising by specifying Id", tags = { "advertisings" })
     @PutMapping("/advertisings/{id}")
-    public AdvertisingResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveAdvertisingResource resource) {
+    public AdvertisingResource updateAdvertising(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveAdvertisingResource resource) {
         Advertising advertising = convertToEntity(resource);
         return convertToResource(advertisingService.updateAdvertising(postId, advertising));
     }

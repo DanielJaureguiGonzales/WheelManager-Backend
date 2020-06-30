@@ -31,7 +31,7 @@ public class UserProfileController {
     private UserProfileService userProfileService;
 
     @GetMapping("/userprofile")
-    public Page<UserProfileResource> getAllPosts(
+    public Page<UserProfileResource> getAllUserProfiles(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<UserProfile> userProfilesPage = userProfileService.getAllUsersProfile(pageable);
@@ -41,26 +41,26 @@ public class UserProfileController {
     }
 
     @GetMapping("/userprofile/{id}")
-    public UserProfileResource getPostById(
+    public UserProfileResource getUserProfileById(
             @Parameter(description="UserProfile Id")
             @PathVariable(name = "id") Long userProfileId) {
         return convertToResource(userProfileService.getUserProfileById(userProfileId));
     }
 
     @PostMapping("/userprofile")
-    public UserProfileResource createPost(@Valid @RequestBody SaveUserProfileResource resource)  {
+    public UserProfileResource createUserProfile(@Valid @RequestBody SaveUserProfileResource resource)  {
         UserProfile userProfile = convertToEntity(resource);
         return convertToResource(userProfileService.createUserProfile(userProfile));
     }
 
     @PutMapping("/userprofile/{id}")
-    public UserProfileResource updatePost(@PathVariable(name = "id") Long userProfileId, @Valid @RequestBody SaveUserProfileResource resource) {
+    public UserProfileResource updateUserProfile(@PathVariable(name = "id") Long userProfileId, @Valid @RequestBody SaveUserProfileResource resource) {
         UserProfile userProfile = convertToEntity(resource);
         return convertToResource(userProfileService.updateUserProfile(userProfileId, userProfile));
     }
 
     @DeleteMapping("/userprofile/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long userProfileId) {
+    public ResponseEntity<?> deleteUserProfile(@PathVariable(name = "id") Long userProfileId) {
         return userProfileService.deleteUserProfile(userProfileId);
     }
 
