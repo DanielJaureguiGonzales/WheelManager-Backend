@@ -34,7 +34,7 @@ public class ProductCategoryController {
 
     @Operation(summary = "Get ProductCategories", description = "Get All ProductCategories by Pages", tags = { "product_categories" })
     @GetMapping("/product_categories")
-    public Page<ProductCategoryResource> getAllPosts(
+    public Page<ProductCategoryResource> getAllProductCategorys(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<ProductCategory> postsPage = productCategoryService.getAllProductCategories(pageable);
@@ -45,7 +45,7 @@ public class ProductCategoryController {
 
     @Operation(summary = "Get ProductCategory by Id", description = "Get a ProductCategories by specifying Id", tags = { "product_categories" })
     @GetMapping("/product_categories/{id}")
-    public ProductCategoryResource getPostById(
+    public ProductCategoryResource getProductCategoryById(
             @Parameter(description="ProductCategory Id")
             @PathVariable(name = "id") Long productCategoryId) {
         return convertToResource(productCategoryService.getProductCategoryById(productCategoryId));
@@ -68,13 +68,13 @@ public class ProductCategoryController {
 
     @Operation(summary = "Create ProductCategory ", description = "Create an ProductCategory ", tags = { "product_categories" })
     @PostMapping("/product_categories")
-    public ProductCategoryResource createPost(@Valid @RequestBody SaveProductCategoryResource resource)  {
+    public ProductCategoryResource createProductCategory(@Valid @RequestBody SaveProductCategoryResource resource)  {
         ProductCategory productCategory = convertToEntity(resource);
         return convertToResource(productCategoryService.createProductCategory(productCategory));
     }
     @Operation(summary = "Update ProductCategory by Id", description = "Update an ProductCategory by specifying Id", tags = { "product_categories" })
     @PutMapping("/product_categories/{id}")
-    public ProductCategoryResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveProductCategoryResource resource) {
+    public ProductCategoryResource updateProductCategory(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveProductCategoryResource resource) {
         ProductCategory productCategory = convertToEntity(resource);
         return convertToResource(productCategoryService.updateProductCategory(postId, productCategory));
     }

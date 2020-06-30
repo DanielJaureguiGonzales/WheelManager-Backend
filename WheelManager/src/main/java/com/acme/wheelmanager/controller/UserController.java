@@ -43,26 +43,26 @@ public class UserController {
 
     @Operation(summary = "Get User by Id", description = "Get a Users by specifying Id", tags = { "users" })
     @GetMapping("/users/{id}")
-    public UserResource getPostById(
+    public UserResource getUserById(
             @Parameter(description="User Id")
             @PathVariable(name = "id") Long userId) {
         return convertToResource(userService.getUserById(userId));
     }
     @Operation(summary = "Create User ", description = "Create a User ", tags = { "users" })
     @PostMapping("/users")
-    public UserResource createPost(@Valid @RequestBody SaveUserResource resource)  {
+    public UserResource createUser(@Valid @RequestBody SaveUserResource resource)  {
         User user = convertToEntity(resource);
         return convertToResource(userService.createUser(user));
     }
     @Operation(summary = "Update User by Id", description = "Update a User by specifying Id", tags = { "users" })
     @PutMapping("/users/{id}")
-    public UserResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveUserResource resource) {
+    public UserResource updateUser(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveUserResource resource) {
         User user = convertToEntity(resource);
         return convertToResource(userService.updateUser(postId, user));
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long userId) {
+    public ResponseEntity<?> deleteUser(@PathVariable(name = "id") Long userId) {
         return userService.deleteUser(userId);
     }
 
@@ -72,7 +72,7 @@ public class UserController {
         return convertToResource(userService.assignUserPromo(userId, promoId));
     }
 
-    @DeleteMapping("/posts/{postId}/tags/{tagId}")
+    @DeleteMapping("/users/{userId}/promos/{promoId}")
     public UserResource unassignUserPromo(@PathVariable(name = "userId") Long userId,
                                         @PathVariable(name = "promoId") Long promoId) {
         return convertToResource(userService.unassignUserPromo(userId, promoId));

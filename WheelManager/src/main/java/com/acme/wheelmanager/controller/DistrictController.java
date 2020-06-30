@@ -25,7 +25,7 @@ public class DistrictController {
     private DistrictService districtService;
 
     @GetMapping("/departments/{departmentId}/districts")
-    public Page<DistrictResource> getAllDistrictsByPostId(
+    public Page<DistrictResource> getAllDistrictsByDepartmentId(
             @PathVariable(name = "departmentId") Long departmentId,
             Pageable pageable) {
         Page<District> districtPage = districtService.getAllDistrictsByDepartmentId(departmentId, pageable);

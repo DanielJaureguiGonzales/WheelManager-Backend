@@ -33,7 +33,7 @@ public class TouristPlaceController {
 
     @Operation(summary = "Get TouristPlaces", description = "Get All TouristPlaces by Pages", tags = { "touristPlaces" })
     @GetMapping("/touristPlaces")
-    public Page<TouristPlaceResource> getAllPosts(
+    public Page<TouristPlaceResource> getAllTouristPlaces(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<TouristPlace> postsPage = touristPlaceService.getAllTouristPlaces(pageable);
@@ -44,7 +44,7 @@ public class TouristPlaceController {
 
     @Operation(summary = "Get TouristPlace by Id", description = "Get a TouristPlaces by specifying Id", tags = { "touristPlaces" })
     @GetMapping("/touristPlaces/{id}")
-    public TouristPlaceResource getPostById(
+    public TouristPlaceResource getTouristPlaceById(
             @Parameter(description="TouristPlaces Id")
             @PathVariable(name = "id") Long touristPlaceId) {
         return convertToResource(touristPlaceService.getTouristPlaceById(touristPlaceId));
@@ -68,14 +68,14 @@ public class TouristPlaceController {
 
     @Operation(summary = "Create TouristPlaces ", description = "Create a TouristPlace ", tags = { "touristPlaces" })
     @PostMapping("/touristPlaces")
-    public TouristPlaceResource createPost(@RequestBody @Valid SaveTouristPlaceResource resource)  {
+    public TouristPlaceResource createTouristPlace(@RequestBody @Valid SaveTouristPlaceResource resource)  {
         TouristPlace touristPlace = convertToEntity(resource);
         return convertToResource(touristPlaceService.createTouristPlace(touristPlace));
     }
 
     @Operation(summary = "Update TouristPlace by Id", description = "Update a TouristPlace by specifying Id", tags = { "touristPlaces" })
     @PutMapping("/touristPlaces/{id}")
-    public TouristPlaceResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveTouristPlaceResource resource) {
+    public TouristPlaceResource updateTouristPlace(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveTouristPlaceResource resource) {
         TouristPlace touristPlace = convertToEntity(resource);
         return convertToResource(touristPlaceService.updateTouristPlace(postId, touristPlace));
     }

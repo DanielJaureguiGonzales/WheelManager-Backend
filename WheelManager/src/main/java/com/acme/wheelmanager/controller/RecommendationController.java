@@ -33,7 +33,7 @@ public class RecommendationController {
 
     @Operation(summary = "Get Recommendations", description = "Get All Recommendations by Pages", tags = { "recommendations" })
     @GetMapping("/recommendations")
-    public Page<RecommendationResource> getAllPosts(
+    public Page<RecommendationResource> getAllRecommendations(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<Recommendation> postsPage = recommendationService.getAllRecommendations(pageable);
@@ -44,7 +44,7 @@ public class RecommendationController {
 
     @Operation(summary = "Get Recommendation by Id", description = "Get a Recommendations by specifying Id", tags = { "recommendations" })
     @GetMapping("/recommendations/{id}")
-    public RecommendationResource getPostById(
+    public RecommendationResource getRecommendationById(
             @Parameter(description="Recommendations Id")
             @PathVariable(name = "id") Long recommendationId) {
         return convertToResource(recommendationService.getRecommendationById(recommendationId));
@@ -68,14 +68,14 @@ public class RecommendationController {
 
     @Operation(summary = "Create Recommendations ", description = "Create a Recommendation ", tags = { "recommendations" })
     @PostMapping("/recommendations")
-    public RecommendationResource createPost(@RequestBody @Valid SaveRecommendationResource resource)  {
+    public RecommendationResource createRecommendation(@RequestBody @Valid SaveRecommendationResource resource)  {
         Recommendation recommendation = convertToEntity(resource);
         return convertToResource(recommendationService.createRecommendation(recommendation));
     }
 
     @Operation(summary = "Update Recommendation by Id", description = "Update a Recommendation by specifying Id", tags = { "recommendations" })
     @PutMapping("/recommendations/{id}")
-    public RecommendationResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveRecommendationResource resource) {
+    public RecommendationResource updateRecommendation(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveRecommendationResource resource) {
         Recommendation recommendation = convertToEntity(resource);
         return convertToResource(recommendationService.updateRecommendation(postId, recommendation));
     }

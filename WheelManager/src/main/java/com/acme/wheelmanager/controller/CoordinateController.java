@@ -33,7 +33,7 @@ public class CoordinateController {
 
     @Operation(summary = "Get Coordinates", description = "Get All Coordinates by Pages", tags = { "coordinates" })
     @GetMapping("/coordinates")
-    public Page<CoordinateResource> getAllPosts(
+    public Page<CoordinateResource> getAllCoordinates(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<Coordinate> postsPage = coordinateService.getAllCoordinates(pageable);
@@ -44,7 +44,7 @@ public class CoordinateController {
 
     @Operation(summary = "Get Coordinate by Id", description = "Get a Coordinates by specifying Id", tags = { "coordinates" })
     @GetMapping("/coordinates/{id}")
-    public CoordinateResource getPostById(
+    public CoordinateResource getCoordinateById(
             @Parameter(description="Coordinates Id")
             @PathVariable(name = "id") Long coordinateId) {
         return convertToResource(coordinateService.getCoordinateById(coordinateId));
@@ -68,14 +68,14 @@ public class CoordinateController {
 
     @Operation(summary = "Create Coordinates ", description = "Create a Coordinate ", tags = { "coordinates" })
     @PostMapping("/coordinates")
-    public CoordinateResource createPost(@RequestBody @Valid SaveCoordinateResource resource)  {
+    public CoordinateResource createCoordinate(@RequestBody @Valid SaveCoordinateResource resource)  {
         Coordinate coordinate = convertToEntity(resource);
         return convertToResource(coordinateService.createCoordinate(coordinate));
     }
 
     @Operation(summary = "Update Coordinate by Id", description = "Update a Coordinate by specifying Id", tags = { "coordinates" })
     @PutMapping("/coordinates/{id}")
-    public CoordinateResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveCoordinateResource resource) {
+    public CoordinateResource updateCoordinate(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveCoordinateResource resource) {
         Coordinate coordinate = convertToEntity(resource);
         return convertToResource(coordinateService.updateCoordinate(postId, coordinate));
     }

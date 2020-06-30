@@ -36,7 +36,7 @@ public class PromoController {
     }
 
     @GetMapping("/promos/{id}")
-    public PromoResource getPostById(
+    public PromoResource getPromoById(
             @Parameter(description="Promo Id")
             @PathVariable(name = "id") Long promoId) {
         return convertToResource(promoService.getPromoById(promoId));

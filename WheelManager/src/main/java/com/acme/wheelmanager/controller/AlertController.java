@@ -33,7 +33,7 @@ public class AlertController {
 
     @Operation(summary = "Get Alerts", description = "Get All Alerts by Pages", tags = { "alerts" })
     @GetMapping("/alerts")
-    public Page<AlertResource> getAllPosts(
+    public Page<AlertResource> getAllAlerts(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<Alert> postsPage = alertService.getAllAlerts(pageable);
@@ -44,7 +44,7 @@ public class AlertController {
 
     @Operation(summary = "Get Alert by Id", description = "Get a Alerts by specifying Id", tags = { "alerts" })
     @GetMapping("/alerts/{id}")
-    public AlertResource getPostById(
+    public AlertResource getAlertById(
             @Parameter(description="Alerts Id")
             @PathVariable(name = "id") Long alertId) {
         return convertToResource(alertService.getAlertById(alertId));
@@ -68,14 +68,14 @@ public class AlertController {
 
     @Operation(summary = "Create Alerts ", description = "Create a Alert ", tags = { "alerts" })
     @PostMapping("/alerts")
-    public AlertResource createPost(@RequestBody @Valid SaveAlertResource resource)  {
+    public AlertResource createAlert(@RequestBody @Valid SaveAlertResource resource)  {
         Alert alert = convertToEntity(resource);
         return convertToResource(alertService.createAlert(alert));
     }
 
     @Operation(summary = "Update Alert by Id", description = "Update a Alert by specifying Id", tags = { "alerts" })
     @PutMapping("/alerts/{id}")
-    public AlertResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveAlertResource resource) {
+    public AlertResource updateAlert(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveAlertResource resource) {
         Alert alert = convertToEntity(resource);
         return convertToResource(alertService.updateAlert(postId, alert));
     }

@@ -32,7 +32,7 @@ public class CorporationController {
 
     @Operation(summary = "Get Corporations", description = "Get All Corporations by Pages", tags = { "corporations" })
     @GetMapping("/corporations")
-    public Page<CorporationResource> getAllPosts(
+    public Page<CorporationResource> getAllCorporations(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
         Page<Corporation> postsPage = corporationService.getAllCorporations(pageable);
@@ -43,7 +43,7 @@ public class CorporationController {
 
     @Operation(summary = "Get Corporation by Id", description = "Get a Corporations by specifying Id", tags = { "corporations" })
     @GetMapping("/corporations/{id}")
-    public CorporationResource getPostById(
+    public CorporationResource getCorporationById(
             @Parameter(description="Corporation Id")
             @PathVariable(name = "id") Long corporationId) {
         return convertToResource(corporationService.getCorporationById(corporationId));
@@ -51,20 +51,20 @@ public class CorporationController {
 
     @Operation(summary = "Create Corporation ", description = "Create a Corporation ", tags = { "corporations" })
     @PostMapping("/corporations")
-    public CorporationResource createPost(@Valid @RequestBody SaveCorporationResource resource)  {
+    public CorporationResource createCorporation(@Valid @RequestBody SaveCorporationResource resource)  {
         Corporation corporation = convertToEntity(resource);
         return convertToResource(corporationService.createCorporation(corporation));
     }
     @Operation(summary = "Update Corporation by Id", description = "Update a Corporation by specifying Id", tags = { "corporations" })
     @PutMapping("/corporations/{id}")
-    public CorporationResource updatePost(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveCorporationResource resource) {
+    public CorporationResource updateCorporation(@PathVariable(name = "id") Long postId, @Valid @RequestBody SaveCorporationResource resource) {
         Corporation corporation = convertToEntity(resource);
         return convertToResource(corporationService.updateCorporation(postId, corporation));
     }
 
     @Operation(summary = "Delete Corporation by Id", description = "Delete a Corporation by specifying Id", tags = { "corporations" })
     @DeleteMapping("/corporations/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long corporationId) {
+    public ResponseEntity<?> deleteCorporation(@PathVariable(name = "id") Long corporationId) {
         return corporationService.deleteCorporation(corporationId);
     }
     private Corporation convertToEntity(SaveCorporationResource resource) {
