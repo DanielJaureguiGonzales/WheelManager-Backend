@@ -23,13 +23,14 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class UserProfileController {
+
     @Autowired
     private ModelMapper mapper;
 
     @Autowired
     private UserProfileService userProfileService;
 
-    @GetMapping("/posts")
+    @GetMapping("/userprofile")
     public Page<UserProfileResource> getAllPosts(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
@@ -39,26 +40,26 @@ public class UserProfileController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
-    @GetMapping("/posts/{id}")
+    @GetMapping("/userprofile/{id}")
     public UserProfileResource getPostById(
             @Parameter(description="UserProfile Id")
             @PathVariable(name = "id") Long userProfileId) {
         return convertToResource(userProfileService.getUserProfileById(userProfileId));
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/userprofile")
     public UserProfileResource createPost(@Valid @RequestBody SaveUserProfileResource resource)  {
         UserProfile userProfile = convertToEntity(resource);
         return convertToResource(userProfileService.createUserProfile(userProfile));
     }
 
-    @PutMapping("/posts/{id}")
+    @PutMapping("/userprofile/{id}")
     public UserProfileResource updatePost(@PathVariable(name = "id") Long userProfileId, @Valid @RequestBody SaveUserProfileResource resource) {
         UserProfile userProfile = convertToEntity(resource);
         return convertToResource(userProfileService.updateUserProfile(userProfileId, userProfile));
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/userprofile/{id}")
     public ResponseEntity<?> deletePost(@PathVariable(name = "id") Long userProfileId) {
         return userProfileService.deleteUserProfile(userProfileId);
     }

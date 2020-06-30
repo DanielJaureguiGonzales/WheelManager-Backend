@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Service
 public class SubscriptionPlanServiceImpl implements SubscriptionPlanService{
 
     @Autowired
