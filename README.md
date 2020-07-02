@@ -1,5 +1,6 @@
 # WheelManager-Backend
-Documentacio:https://app.swaggerhub.com/apis-docs/YvanPB21/WheelManager/3.0 
+Documentacion:https://app.swaggerhub.com/apis-docs/YvanPB21/WheelManager/3.0 
+
 Términos y condiciones de Wheel Manager
 1.	SOBRE WHEEL MANAGER Y LA APLICACIÓN
 Wheel Manager proporciona servicios personalizados con características sociales e interactivas para poner a disposición del usuario información respecto a las alternativas de transporte vehicular personal dentro de la ciudad, indicándole las rutas posibles desde y hacia los puntos que el usuario elija, de acuerdo con el medio de transporte elegido por el usuario y el tiempo estimado de duración del trayecto. Así como la posibilidad de contratar servicios de mantenimiento u otros ofrecidos por terceros dentro de la ciudad, a través de la aplicación.
