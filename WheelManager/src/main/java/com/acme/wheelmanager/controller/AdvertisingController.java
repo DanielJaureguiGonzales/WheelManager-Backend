@@ -34,13 +34,13 @@ public class AdvertisingController {
 
     @Operation(summary = "Get Advertisings", description = "Get All Advertisings by Pages", tags = { "advertisings" })
     @GetMapping("/advertisings")
-    public Page<AdvertisingResource> getAllAdvertisings(
+    public List<AdvertisingResource> getAllAdvertisings(
             @Parameter(description="Pageable Parameter")
                     Pageable pageable) {
-        Page<Advertising> postsPage = advertisingService.getAllAdvertisings(pageable);
-        List<AdvertisingResource> resources = postsPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        List<Advertising> postsPage = advertisingService.getAllAdvertisings();
+        List<AdvertisingResource> resources = postsPage.stream().map(this::convertToResource).collect(Collectors.toList());
 
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Advertising by Id", description = "Get a Advertisings by specifying Id", tags = { "advertisings" })

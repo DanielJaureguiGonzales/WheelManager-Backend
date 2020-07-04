@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdvertisingServiceImpl implements AdvertisingService {
 
@@ -57,7 +59,7 @@ public class AdvertisingServiceImpl implements AdvertisingService {
     }
 
     @Override
-    public Page<Advertising> getAllAdvertisings(Pageable pageable) {
-        return advertisingRepository.findAll(pageable);
+    public List<Advertising> getAllAdvertisings() {
+        return advertisingRepository.findAll();
     }
 }
